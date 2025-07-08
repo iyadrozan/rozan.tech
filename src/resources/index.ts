@@ -10,7 +10,7 @@ export const social = [
     link: "https://www.linkedin.com/in/iyad-rozan"
   },
   {
-    name: "@code.eclipses",
+    name: "code.eclipses",
     icon: "threads", 
     link: "https://www.threads.com/@code.eclipses"
   },

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Fade, Flex } from "@once-ui-system/core";
+import { Fade, Flex, LetterFx } from "@once-ui-system/core";
 
 type TimeDisplayProps = {
   locale?: string;
@@ -61,7 +61,12 @@ export default function Header() {
       >
         <Flex paddingLeft="12" fillWidth vertical="center" textVariant="body-default-s">
           <Flex>
-            {isLoading ? 'Loading...' : 'Asia/Makassar'}
+            <LetterFx
+              speed="medium"
+              trigger="instant"
+            >
+              {isLoading ? 'Loading...' : 'Asia/Makassar'}
+            </LetterFx>
           </Flex>
         </Flex>
 
