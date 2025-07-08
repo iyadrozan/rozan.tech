@@ -4,14 +4,46 @@ const nextConfig = {
     compiler: "modern",
     silenceDeprecations: ["legacy-js-api"],
   },
-  // Allow cross-origin requests from local network IPs
-  allowedDevOrigins: [
-    "192.168.100.5",
-    "192.168.1.*", // Allow any IP in 192.168.1.x range
-    "192.168.100.*", // Allow any IP in 192.168.100.x range
-    "10.0.0.*", // Allow any IP in 10.0.0.x range
-    "172.16.*.*", // Allow any IP in 172.16.x.x range
-  ],
+  // Performance optimizations
+  compress: true,
+  poweredByHeader: false,
+  
+  // SEO optimizations
+  generateEtags: true,
+  
+  // Security headers
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+        ],
+      },
+    ];
+  },
+  
+  // Allow cross-origin requests from local network IPs (development only)
+  ...(process.env.NODE_ENV === 'development' && {
+    allowedDevOrigins: [
+      "192.168.100.5",
+      "192.168.1.*",
+      "192.168.100.*",
+      "10.0.0.*",
+      "172.16.*.*",
+    ],
+  }),
 };
 
 export default nextConfig;

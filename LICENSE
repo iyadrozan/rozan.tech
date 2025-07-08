@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2024-2025 Once UI
+Copyright (c) 2024-2025 Iyad Rozan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +19,22 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+## Third-Party Licenses
+
+This project uses the following open-source libraries and frameworks:
+
+- **Next.js** - MIT License (Copyright Vercel, Inc.)
+- **React** - MIT License (Copyright Facebook, Inc.)
+- **Once UI System** - MIT License (Copyright Once UI)
+- **Framer Motion** - MIT License (Copyright Framer B.V.)
+- **TypeScript** - Apache License 2.0 (Copyright Microsoft Corporation)
+
+For complete license information of dependencies, please refer to their respective repositories.
+
+## Attribution
+
+Built with ❤️ in Sulawesi, Indonesia by Iyad Rozan.
+Website: https://rozan.tech

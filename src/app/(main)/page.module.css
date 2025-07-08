@@ -1,0 +1,36 @@
+.cycleText {
+  position: relative;
+  height: 4rem;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  margin-top: 24px;
+  font-size: 1.5rem;
+}
+
+.greeting {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--scheme-neutral-1200);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.cursor {
+  width: 2px;
+  height: 1.2em;
+  background-color: var(--scheme-neutral-1200);
+  margin-left: 2px;
+  animation: blinkCursor 1s infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
