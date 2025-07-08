@@ -108,7 +108,7 @@ const effects = {
 const meta = {
   home: {
     path: "/",
-    title: "Iyad Rozan - Sulawesi Developer & Technology Enthusiast | rozan.tech",
+    title: "Iyad Rozan - Web Developer & Technology Enthusiast | rozan.tech",
     description: "Sulawesi-based developer passionate about transforming complex ideas into simple, purposeful technology. Specializing in web development, open-source solutions, and innovative software engineering.",
     image: "/images/og-rozan.jpg",
     imageAlt: "Iyad Rozan - Sulawesi Developer and Technology Enthusiast",
@@ -132,7 +132,7 @@ const meta = {
       card: "summary_large_image",
       site: "@iyadrozan",
       creator: "@iyadrozan",
-      title: "Iyad Rozan - Sulawesi Developer & Technology Enthusiast",
+      title: "Iyad Rozan - Web Developer & Technology Enthusiast",
       description: "Sulawesi-based developer passionate about transforming complex ideas into simple, purposeful technology. Building innovative solutions with modern web technologies.",
       image: "/images/og-rozan.jpg",
       imageAlt: "Iyad Rozan - Sulawesi Developer and Technology Enthusiast"
@@ -141,7 +141,7 @@ const meta = {
       type: "website",
       locale: "en_US",
       url: baseURL,
-      title: "Iyad Rozan - Sulawesi Developer & Technology Enthusiast",
+      title: "Iyad Rozan - Web Developer & Technology Enthusiast",
       description: "Sulawesi-based developer passionate about transforming complex ideas into simple, purposeful technology. Specializing in web development, open-source solutions, and innovative software engineering.",
       siteName: "rozan.tech",
       images: [
@@ -149,7 +149,7 @@ const meta = {
           url: "/images/og-rozan.jpg",
           width: 1200,
           height: 630,
-          alt: "Iyad Rozan - Sulawesi Developer and Technology Enthusiast",
+          alt: "Iyad Rozan - Web Developer and Technology Enthusiast",
           type: "image/jpeg"
         },
         {
