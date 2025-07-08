@@ -65,20 +65,21 @@ export default function Home() {
               rel="noopener noreferrer"
               style={{ textDecoration: 'none' }}
               variant="secondary"
+              size="s"
             >
               <Flex
                 align="center"
                 gap="xs"
-                padding="xs"
-                radius="s"
+                padding="s"
+                radius="m"
                 style={{
                   transition: "all 0.2s ease",
                   cursor: "pointer"
                 }}
                 onBackground="neutral-weak"
               >
-                <Icon name={item.icon} size="s" />
-                <Text variant="body-default-s" onBackground="neutral-strong">
+                <Icon name={item.icon} size="xs" />
+                <Text variant="body-default-xs" onBackground="neutral-strong">
                   {item.name}
                 </Text>
               </Flex>

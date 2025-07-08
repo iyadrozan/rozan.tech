@@ -12,27 +12,27 @@ const person = {
 
 const social = [
   {
-    name: "GitHub",
+    name: "Iyad Rozan",
     icon: "github",
     link: "https://github.com/iyadrozan",
   },
   {
-    name: "LinkedIn",
+    name: "Iyad Rozan",
     icon: "linkedin",
     link: "https://www.linkedin.com/in/iyad-rozan",
   },
   {
-    name: "Threads",
+    name: "@code.eclipses",
     icon: "threads",
     link: "https://www.threads.com/@code.eclipses",
   },
   {
-    name: "Instagram",
+    name: "@code.eclipses",
     icon: "instagram",
     link: "https://www.instagram.com/code.eclipses"
   },
   {
-    name: "Email",
+    name: "hi@rozan.tech",
     icon: "email",
     link: `mailto:${person.email}`,
   },

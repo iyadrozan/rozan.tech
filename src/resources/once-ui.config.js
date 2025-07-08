@@ -2,30 +2,31 @@ const baseURL = process.env.NODE_ENV === 'production'
   ? "https://rozan.tech" 
   : `http://${process.env.NEXT_PUBLIC_HOST || 'localhost'}:${process.env.PORT || 3000}`;
 
-import { Geist } from "next/font/google";
-import { Geist_Mono } from "next/font/google";
+import { Lexend } from "next/font/google";
+import { Zen_Kaku_Gothic_New } from "next/font/google";
 
-const heading = Geist({
+const heading = Lexend({
   variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
 });
 
-const body = Geist({
+const body = Lexend({
   variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
 });
 
-const label = Geist({
+const label = Lexend({
   variable: "--font-label",
   subsets: ["latin"],
   display: "swap",
 });
 
-const code = Geist_Mono({
+const code = Zen_Kaku_Gothic_New({
   variable: "--font-code",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
   display: "swap",
 });
 

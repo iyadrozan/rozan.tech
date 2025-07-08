@@ -1,7 +1,7 @@
 import { IconType } from "react-icons";
 
 import { HiEnvelope } from "react-icons/hi2";
-import { FaGithub, FaLinkedin, FaThreads, FaInstagram, FaCat } from "react-icons/fa6";
+import { FaGithub, FaLinkedin, FaThreads, FaInstagram, FaCat, FaDiscord } from "react-icons/fa6";
 
 export const iconLibrary: Record<string, IconType> = {
   email: HiEnvelope,
@@ -9,7 +9,8 @@ export const iconLibrary: Record<string, IconType> = {
   linkedin: FaLinkedin,
   threads: FaThreads,
   instagram: FaInstagram,
-  cat: FaCat
+  cat: FaCat,
+  discord: FaDiscord
 };
 
 export type IconLibrary = typeof iconLibrary;
