@@ -1,4 +1,6 @@
-const baseURL = "https://localhost:3000";
+const baseURL = process.env.NODE_ENV === 'production' 
+  ? "https://your-domain.com" 
+  : `http://${process.env.NEXT_PUBLIC_HOST || 'localhost'}:${process.env.PORT || 3000}`;
 
 import { Geist } from "next/font/google";
 import { Geist_Mono } from "next/font/google";

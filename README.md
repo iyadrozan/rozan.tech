@@ -16,6 +16,22 @@ npm run dev
 
 3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+### Network Access
+
+To access the development server from other devices on your network:
+
+1. Start the server with network binding:
+```bash
+npm run dev -- --hostname 0.0.0.0
+```
+
+2. Access from other devices using your machine's IP:
+```
+http://192.168.100.5:3000
+```
+
+3. The project is already configured to allow cross-origin requests from local network IPs.
+
 ## Features
 
 - **Next.js 15** with TypeScript
