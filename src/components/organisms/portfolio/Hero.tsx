@@ -125,7 +125,7 @@ const Hero = () => {
     };
 
     const draw = () => {
-      ctx.globalCompositeOperation = "normal";
+      ctx.globalCompositeOperation = "source-over";
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(textCanvas, 0, 0);
       ctx.globalCompositeOperation = "source-in";
