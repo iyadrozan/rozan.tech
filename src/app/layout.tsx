@@ -5,14 +5,14 @@ import Cursor from "@/components/organisms/portfolio/Cursor";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://rozan.tech"),
-  title: "Rozan.tech — Portfolio",
-  description: "Rozan's portfolio with bold visuals and smooth motion.",
+  title: "Hi my name is Rozan",
+  description: "Hi, my name is Rozan — a full-stack developer building bold, animated web experiences.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Rozan.tech — Portfolio",
-    description: "Rozan's portfolio with bold visuals and smooth motion.",
+    title: "Hi my name is Rozan",
+    description: "Hi, my name is Rozan — a full-stack developer building bold, animated web experiences.",
     url: "https://rozan.tech",
     siteName: "Rozan.tech",
     images: [
@@ -28,8 +28,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rozan.tech — Portfolio",
-    description: "Rozan's portfolio with bold visuals and smooth motion.",
+    title: "Hi my name is Rozan",
+    description: "Hi, my name is Rozan — a full-stack developer building bold, animated web experiences.",
     images: ["/twitter.png"],
   },
 };
