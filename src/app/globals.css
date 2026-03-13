@@ -144,6 +144,33 @@
     overflow: hidden;
   }
 
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    padding-inline: 0;
+    transition:
+      color 0.3s ease,
+      text-decoration-color 0.3s ease;
+    text-decoration-thickness: 2px;
+  }
+
+  .marquee-text {
+    transition:
+      color 0.3s ease,
+      text-decoration-color 0.3s ease;
+    text-decoration-thickness: 2px;
+  }
+
+  .marquee-text:hover {
+    color: hsl(var(--lime));
+    text-decoration-color: hsl(var(--lime));
+  }
+
   .noise-bg {
     position: relative;
   }

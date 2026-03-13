@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionHeader from "@/components/molecules/SectionHeader";
 import { aboutContent, sectionHeaders } from "@/content/portfolio";
+import Image from "next/image";
 
 const About = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -111,15 +112,17 @@ const About = () => {
         {/* Right: Image + Tags */}
         <div ref={imageRef} className="space-y-8">
           <div className="relative">
-            <div className="aspect-[4/5] bg-surface border border-border overflow-hidden group">
-              <div className="w-full h-full bg-gradient-to-br from-muted/50 to-surface flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-32 h-32 rounded-full border-2 border-lime/30 mx-auto mb-4 flex items-center justify-center">
-                    <span className="font-display font-bold text-5xl text-lime">{aboutContent.profile.initials}</span>
-                  </div>
-                  <p className="font-mono-custom text-xs text-muted-foreground">{aboutContent.profile.name}</p>
-                  <p className="font-mono-custom text-xs text-lime mt-1">{aboutContent.profile.handle}</p>
-                </div>
+            <div className="bg-surface border border-border overflow-hidden group relative inline-flex items-center justify-center p-6">
+              <div className="absolute inset-0 bg-gradient-to-br from-muted/40 via-surface to-surface" />
+              <div className="relative z-[1] flex items-center justify-center">
+                <Image
+                  src="/ilustrasi_rozan.png"
+                  alt={aboutContent.profile.name}
+                  width={408}
+                  height={612}
+                  className="h-auto w-[70%] max-w-[320px] drop-shadow-[0_24px_40px_rgba(0,0,0,0.35)]"
+                  priority
+                />
               </div>
               {/* Corner accents */}
               <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-lime" />
@@ -127,7 +130,9 @@ const About = () => {
             </div>
 
             <div className="absolute -bottom-4 -right-4 bg-lime text-primary-foreground px-4 py-2">
-              <span className="font-mono-custom text-xs font-bold">{aboutContent.profile.availability}</span>
+              <span className="font-mono-custom text-xs font-bold">
+                {aboutContent.profile.availability}
+              </span>
             </div>
           </div>
 

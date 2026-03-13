@@ -15,7 +15,7 @@ export const heroContent = {
   scrollLabel: "SCROLL",
   stats: [
     { num: "5+", label: "Years Exp." },
-    { num: "40+", label: "Projects" },
-    { num: "20+", label: "Clients" },
+    { num: "10+", label: "Projects" },
+    { num: "5+", label: "Clients" },
   ],
 } satisfies HeroContent;

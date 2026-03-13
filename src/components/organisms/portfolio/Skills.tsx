@@ -67,15 +67,15 @@ const Skills = () => {
       </div>
 
       {/* Marquee */}
-      <div className="mb-20 border-y border-border py-4 overflow-hidden">
-        <div className="flex animate-marquee whitespace-nowrap">
+      <div className="marquee mb-20 border-y border-border py-4 overflow-hidden">
+        <div className="marquee-track flex animate-marquee whitespace-nowrap">
           {[...techItems, ...techItems].map((item, i) => (
             <span
               key={i}
-              className="font-display font-bold text-4xl md:text-5xl uppercase text-muted/20 mx-8"
+              className="marquee-item font-display font-bold text-4xl md:text-5xl uppercase text-white/20"
             >
-              {item}
-              <span className="text-lime mx-4">✦</span>
+              <span className="marquee-text">{item}</span>
+              <span className="marquee-sep text-lime px-6">✦</span>
             </span>
           ))}
         </div>
