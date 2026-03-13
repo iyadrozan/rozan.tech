@@ -4,5 +4,10 @@ export const footerContent = {
   brand: "Rozan.tech",
   copyright: "© 2026. All rights reserved.",
   status: "Open to Work",
-  socials: ["Instagram", "GitHub", "LinkedIn", "Email"],
+  socials: [
+    { label: "Instagram", href: "https://instagram.com/iyadrozan" },
+    { label: "GitHub", href: "https://github.com/iyadrozan" },
+    { label: "LinkedIn", href: "https://linkedin.com/in/iyad-rozan" },
+    { label: "Email", href: "mailto:hello@rozan.tech" },
+  ],
 } satisfies FooterContent;

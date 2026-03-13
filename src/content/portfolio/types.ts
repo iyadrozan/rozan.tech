@@ -24,12 +24,11 @@ export type AboutContent = {
 export type ProjectItem = {
   id: string;
   title: string;
-  category: string;
-  tags: string[];
   year: string;
+  genre: string;
+  link: string;
+  image: string;
   desc: string;
-  color: string;
-  accentColor: string;
 };
 
 export type SkillGroup = {
@@ -62,7 +61,7 @@ export type FooterContent = {
   brand: string;
   copyright: string;
   status: string;
-  socials: string[];
+  socials: { label: string; href: string }[];
 };
 
 export type LoaderContent = {

@@ -17,7 +17,7 @@ export const contactContent = {
     },
     {
       label: "LinkedIn",
-      value: "linkedin.com/in/iyadrozan",
+      value: "linkedin.com/in/iyad-rozan",
       href: "https://www.linkedin.com/in/iyad-rozan",
     },
     {

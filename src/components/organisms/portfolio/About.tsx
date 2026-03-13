@@ -111,16 +111,16 @@ const About = () => {
 
         {/* Right: Image + Tags */}
         <div ref={imageRef} className="space-y-8">
-          <div className="relative">
-            <div className="bg-surface border border-border overflow-hidden group relative inline-flex items-center justify-center p-6">
+          <div className="relative inline-block">
+            <div className="bg-surface border border-border overflow-hidden group relative inline-block">
               <div className="absolute inset-0 bg-gradient-to-br from-muted/40 via-surface to-surface" />
-              <div className="relative z-[1] flex items-center justify-center">
+              <div className="relative z-[1] w-[320px] max-w-full">
                 <Image
                   src="/ilustrasi_rozan.png"
                   alt={aboutContent.profile.name}
                   width={408}
                   height={612}
-                  className="h-auto w-[70%] max-w-[320px] drop-shadow-[0_24px_40px_rgba(0,0,0,0.35)]"
+                  className="h-auto w-full drop-shadow-[0_24px_40px_rgba(0,0,0,0.35)]"
                   priority
                 />
               </div>
@@ -129,7 +129,7 @@ const About = () => {
               <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-lime" />
             </div>
 
-            <div className="absolute -bottom-4 -right-4 bg-lime text-primary-foreground px-4 py-2">
+            <div className="absolute -bottom-3 -right-3 bg-lime text-primary-foreground px-4 py-2">
               <span className="font-mono-custom text-xs font-bold">
                 {aboutContent.profile.availability}
               </span>

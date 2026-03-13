@@ -1,19 +1,23 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionHeader from "@/components/molecules/SectionHeader";
 import { projects, sectionHeaders } from "@/content/portfolio";
+import Image from "next/image";
 
 const Projects = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const hoverPos = useRef({ x: 0 });
+  const currentPos = useRef({ x: 0 });
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
-      const items = sectionRef.current?.querySelectorAll(".project-item");
+      const items = sectionRef.current?.querySelectorAll(".project-row");
       items?.forEach((item) => {
         gsap.fromTo(
           item,
@@ -35,88 +39,98 @@ const Projects = () => {
     return () => ctx.revert();
   }, []);
 
+  useEffect(() => {
+    const handleMove = (e: MouseEvent) => {
+      hoverPos.current.x = e.clientX;
+    };
+    window.addEventListener("mousemove", handleMove);
+
+    const images = Array.from(
+      listRef.current?.querySelectorAll<HTMLElement>(".project-hover-img") ?? []
+    );
+    const xSetters = images.map((el) => gsap.quickSetter(el, "x", "px"));
+
+    const tick = () => {
+      const dt = 1.0 - Math.pow(1.0 - 0.12, gsap.ticker.deltaRatio());
+      currentPos.current.x += (hoverPos.current.x - currentPos.current.x) * dt;
+      xSetters.forEach((setX) => setX(currentPos.current.x));
+    };
+
+    gsap.ticker.add(tick);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMove);
+      gsap.ticker.remove(tick);
+    };
+  }, []);
+
+  const scrambleLetters = useMemo(() => "ABCDEFGHIJKLMNOPQRSTUVWXYZ", []);
+
   return (
-    <section ref={sectionRef} id="work" className="px-8 md:px-16 py-32 border-t border-border">
+    <section
+      ref={sectionRef}
+      id="work"
+      className="project-section px-8 md:px-16 py-32 border-t border-border"
+    >
       <SectionHeader
         {...sectionHeaders.projects}
         metaRight={`${projects.length} projects`}
       />
 
-      <div className="space-y-0">
-        {projects.map((project, i) => (
-          <div
+      <ul ref={listRef} className="project-list">
+        {projects.map((project) => (
+          <li
             key={project.id}
-            className="project-item group border-b border-border py-8 md:py-10 cursor-pointer"
-            onMouseEnter={() => setHoveredId(project.id)}
+            className="project-row"
+            onMouseEnter={(event) => {
+              setHoveredId(project.id);
+              const target = event.currentTarget.querySelector("h3");
+              if (!target) return;
+              const finalText = project.title;
+              let iteration = 0;
+              const interval = window.setInterval(() => {
+                target.textContent = finalText
+                  .split("")
+                  .map((letter, index) => {
+                    if (index < iteration) return finalText[index] ?? "";
+                    return scrambleLetters[Math.floor(Math.random() * scrambleLetters.length)];
+                  })
+                  .join("");
+                if (iteration >= finalText.length) {
+                  clearInterval(interval);
+                }
+                iteration += 1 / 3;
+              }, 20);
+            }}
             onMouseLeave={() => setHoveredId(null)}
-            data-cursor
           >
-            <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-0">
-              {/* Number */}
-              <span className="font-mono-custom text-xs text-muted-foreground w-12 shrink-0">
-                {project.id}
-              </span>
-
-              {/* Title */}
-              <div className="flex-1 md:px-8">
-                <h3
-                  className={`font-display font-bold text-3xl md:text-5xl transition-colors duration-300 ${
-                    hoveredId === project.id ? "text-lime" : "text-foreground"
-                  }`}
-                >
-                  {project.title}
-                </h3>
-                <p
-                  className={`font-mono-custom text-xs mt-1 transition-all duration-300 max-h-0 overflow-hidden ${
-                    hoveredId === project.id ? "max-h-20 text-muted-foreground opacity-100 mt-2" : "opacity-0"
-                  }`}
-                >
-                  {project.desc}
-                </p>
-              </div>
-
-              {/* Category */}
-              <span className="font-mono-custom text-xs text-muted-foreground hidden md:block w-40">
-                {project.category}
-              </span>
-
-              {/* Tags */}
-              <div className="hidden md:flex items-center gap-2 w-56">
-                {project.tags.map((tag) => (
-                  <span key={tag} className="font-mono-custom text-xs px-2 py-1 border border-border text-muted-foreground">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              {/* Year + Arrow */}
-              <div className="flex items-center gap-4 shrink-0">
-                <span className="font-mono-custom text-xs text-muted-foreground">{project.year}</span>
-                <div
-                  className={`w-10 h-10 border flex items-center justify-center transition-all duration-300 ${
-                    hoveredId === project.id
-                      ? "border-lime bg-lime text-primary-foreground rotate-0"
-                      : "border-border text-foreground -rotate-45"
-                  }`}
-                >
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M2 7H12M12 7L8 3M12 7L8 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-              </div>
+            <div className="project-index">
+              <span>{project.id}</span>
             </div>
-          </div>
+            <div className="project-year">
+              <span>{project.year}</span>
+            </div>
+            <div className="project-name">
+              <h3 data-value={project.title}>{project.title}</h3>
+            </div>
+            <div className="project-genre">
+              <span>{project.genre}</span>
+            </div>
+            <div className="project-link">
+              <a href={project.link} target="_blank" rel="noreferrer">
+                <svg width="1.25rem" height="1.25rem" viewBox="0 0 16 16" fill="none">
+                  <path d="M12.75 4C12.75 3.58579 12.4142 3.25 12 3.25C11.5858 3.25 11.25 3.58579 11.25 4H12.75ZM11.25 10C11.25 10.4142 11.5858 10.75 12 10.75C12.4142 10.75 12.75 10.4142 12.75 10H11.25ZM11.25 4V10H12.75V4H11.25Z" fill="currentColor"></path>
+                  <path d="M12 4.75C12.4142 4.75 12.75 4.41421 12.75 4C12.75 3.58579 12.4142 3.25 12 3.25L12 4.75ZM6 3.25C5.58579 3.25 5.25 3.58579 5.25 4C5.25 4.41421 5.58579 4.75 6 4.75L6 3.25ZM12 3.25L6 3.25L6 4.75L12 4.75L12 3.25Z" fill="currentColor"></path>
+                  <path d="M12.5303 4.53033C12.8232 4.23744 12.8232 3.76256 12.5303 3.46967C12.2374 3.17678 11.7626 3.17678 11.4697 3.46967L12.5303 4.53033ZM3.46967 11.4697C3.17678 11.7626 3.17678 12.2374 3.46967 12.5303C3.76256 12.8232 4.23744 12.8232 4.53033 12.5303L3.46967 11.4697ZM11.4697 3.46967L3.46967 11.4697L4.53033 12.5303L12.5303 4.53033L11.4697 3.46967Z" fill="currentColor"></path>
+                </svg>
+              </a>
+            </div>
+            <div className="project-hover-img" data-cursor-area>
+              <Image src={project.image} alt={project.title} fill sizes="34vw" />
+            </div>
+          </li>
         ))}
-      </div>
-
-      <div className="mt-12 flex justify-center">
-        <a
-          href="#"
-          className="font-mono-custom text-xs text-muted-foreground border border-border px-8 py-4 hover:border-lime hover:text-lime transition-all duration-300"
-        >
-          View All Projects →
-        </a>
-      </div>
+      </ul>
     </section>
   );
 };

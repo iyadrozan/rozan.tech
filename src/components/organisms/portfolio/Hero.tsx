@@ -13,6 +13,8 @@ const Hero = () => {
   const ctaRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
+  const digitalRef = useRef<HTMLSpanElement>(null);
+  const digitalCanvasRef = useRef<HTMLCanvasElement>(null);
 
   const addToWordsRef = (el: HTMLSpanElement | null) => {
     if (el && !wordsRef.current.includes(el)) {
@@ -76,6 +78,122 @@ const Hero = () => {
     return () => ctx.revert();
   }, []);
 
+  useEffect(() => {
+    const textEl = digitalRef.current;
+    const canvas = digitalCanvasRef.current;
+    if (!textEl || !canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    const textCanvas = document.createElement("canvas");
+    const textCtx = textCanvas.getContext("2d");
+    const ringCanvas = document.createElement("canvas");
+    const ringCtx = ringCanvas.getContext("2d");
+    if (!ctx || !textCtx || !ringCtx) return;
+
+    const dpi = window.devicePixelRatio || 1;
+    const rings = Array.from({ length: 160 }, (_, i) => ({
+      id: i,
+      hue: gsap.utils.random(70, 110, 1),
+      spread: gsap.utils.random(90, 359, 1),
+      angle: 0,
+    }));
+
+    const origin = { x: 0, y: 0 };
+
+    const drawText = () => {
+      const bounds = textEl.getBoundingClientRect();
+      const width = Math.max(1, Math.floor(bounds.width * dpi));
+      const height = Math.max(1, Math.floor(bounds.height * dpi));
+
+      canvas.width = textCanvas.width = ringCanvas.width = width;
+      canvas.height = textCanvas.height = ringCanvas.height = height;
+
+      const computed = window.getComputedStyle(textEl);
+      const fontSize = parseFloat(computed.fontSize) * dpi;
+      const fontWeight = computed.fontWeight || "800";
+      const fontFamily = computed.fontFamily || "Syne, sans-serif";
+
+      textCtx.clearRect(0, 0, width, height);
+      textCtx.fillStyle = "white";
+      textCtx.textAlign = "center";
+      textCtx.textBaseline = "middle";
+      textCtx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
+      textCtx.fillText("Digital", width / 2, height / 2);
+
+      origin.x = width * 0.7;
+      origin.y = -height * 0.2;
+    };
+
+    const draw = () => {
+      ctx.globalCompositeOperation = "normal";
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(textCanvas, 0, 0);
+      ctx.globalCompositeOperation = "source-in";
+
+      ringCtx.clearRect(0, 0, ringCanvas.width, ringCanvas.height);
+      const gradient = ringCtx.createLinearGradient(0, 0, ringCanvas.width, ringCanvas.height);
+      gradient.addColorStop(0, "hsl(0 0% 4%)");
+      gradient.addColorStop(0.5, "hsl(82 80% 20%)");
+      gradient.addColorStop(1, "hsl(0 0% 4%)");
+      ringCtx.fillStyle = gradient;
+      ringCtx.fillRect(0, 0, ringCanvas.width, ringCanvas.height);
+      ringCtx.lineWidth = 1.35 * dpi;
+      ringCtx.lineCap = "round";
+
+      for (const ring of rings) {
+        ringCtx.strokeStyle = `hsl(${ring.hue}, 80%, 55%)`;
+        ringCtx.save();
+        ringCtx.translate(origin.x, origin.y);
+        ringCtx.rotate((ring.angle * Math.PI) / 180);
+        ringCtx.translate(-origin.x, -origin.y);
+        ringCtx.beginPath();
+        ringCtx.arc(
+          origin.x,
+          origin.y,
+          ring.id * (4 * dpi),
+          0,
+          (ring.spread * Math.PI) / 180
+        );
+        ringCtx.stroke();
+        ringCtx.restore();
+      }
+
+      ctx.drawImage(ringCanvas, 0, 0);
+    };
+
+    drawText();
+
+    const tweens = rings.map((ring) =>
+      gsap.to(ring, {
+        angle: 360,
+        repeat: -1,
+        ease: "none",
+        duration: () => gsap.utils.random(5, 20, 0.2),
+        delay: () => gsap.utils.random(-5, -1, 0.1),
+      })
+    );
+
+    gsap.ticker.fps(24);
+    gsap.ticker.add(draw);
+    draw();
+
+    const handleResize = () => {
+      drawText();
+      draw();
+    };
+
+    const resizeObserver = new ResizeObserver(handleResize);
+    resizeObserver.observe(textEl);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", handleResize);
+      gsap.ticker.remove(draw);
+      tweens.forEach((tween) => tween.kill());
+    };
+  }, []);
+
   return (
     <section
       ref={containerRef}
@@ -103,7 +221,14 @@ const Hero = () => {
                 className={`inline-block ${wi === 1 ? "text-lime italic" : ""}`}
                 style={{ transform: "translateY(110%)", opacity: 0 }}
               >
-                {word}
+                {word === "Digital" ? (
+                  <span ref={digitalRef} className="digital-text-wrap">
+                    <span className="digital-text">Digital</span>
+                    <canvas ref={digitalCanvasRef} className="digital-canvas" aria-hidden="true" />
+                  </span>
+                ) : (
+                  word
+                )}
               </span>
             </span>
           ))}
@@ -145,7 +270,7 @@ const Hero = () => {
       </div>
 
       {/* Scroll indicator */}
-      <div ref={scrollRef} className="absolute bottom-8 right-8 md:right-16 flex flex-col items-center gap-2" style={{ opacity: 0 }}>
+      <div ref={scrollRef} className="absolute bottom-6 right-8 md:right-16 hidden 2xl:flex flex-col items-center gap-2" style={{ opacity: 0 }}>
         <span className="font-mono-custom text-xs text-muted-foreground tracking-widest rotate-90 origin-center mb-2">
           {heroContent.scrollLabel}
         </span>

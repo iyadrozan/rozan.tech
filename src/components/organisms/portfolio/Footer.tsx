@@ -21,11 +21,13 @@ const Footer = () => {
         <div className="flex items-center gap-6">
           {footerContent.socials.map((social) => (
             <a
-              key={social}
-              href="#"
+              key={social.label}
+              href={social.href}
+              target="_blank"
+              rel="noreferrer"
               className="font-mono-custom text-xs text-muted-foreground hover:text-lime transition-colors duration-300 link-underline"
             >
-              {social}
+              {social.label}
             </a>
           ))}
         </div>
