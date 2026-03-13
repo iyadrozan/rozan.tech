@@ -12,7 +12,10 @@ const Contact = () => {
   const [formState, setFormState] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [rateLimited, setRateLimited] = useState(false);
   const durationMs = 5000;
+  const cooldownMs = 30_000;
 
   useEffect(() => {
     registerGsap();
@@ -52,10 +55,39 @@ const Contact = () => {
     return () => ctx.revert();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    const lastSubmit = Number(window.localStorage.getItem("contactLastSubmit") || 0);
+    const now = Date.now();
+    if (now - lastSubmit < cooldownMs) {
+      setRateLimited(true);
+      return;
+    }
+    setRateLimited(false);
+    setIsSubmitting(true);
     setProgress(0);
-    setSubmitted(true);
+    try {
+      const response = await fetch("https://formspree.io/f/mjgarnjo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          message: formState.message,
+        }),
+      });
+
+      if (response.ok) {
+        window.localStorage.setItem("contactLastSubmit", String(Date.now()));
+        setSubmitted(true);
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   useEffect(() => {
@@ -205,10 +237,16 @@ const Contact = () => {
               <div className="contact-form-field pt-4">
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="w-full bg-lime text-primary-foreground font-display font-bold text-lg py-4 hover:bg-lime/90 transition-all duration-300 active:scale-[0.98]"
                 >
-                  {contactContent.form.submitLabel}
+                  {isSubmitting ? "Sending..." : contactContent.form.submitLabel}
                 </button>
+                {rateLimited ? (
+                  <p className="font-mono-custom text-xs text-muted-foreground mt-3">
+                    Please wait a moment before sending another message.
+                  </p>
+                ) : null}
               </div>
             </form>
           )}
