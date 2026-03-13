@@ -2,7 +2,7 @@ import type { LocalizedString } from "./i18n";
 
 export type HeroContent = {
   badge: { left: string; right: string };
-  headlineWords: LocalizedString & { en: string[]; id: string[] };
+  headlineWords: { en: string[]; id: string[] };
   subtext: LocalizedString;
   cta: {
     primary: { label: LocalizedString; href: string };
