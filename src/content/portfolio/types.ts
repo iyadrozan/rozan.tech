@@ -34,7 +34,7 @@ export type ProjectItem = {
 
 export type SkillGroup = {
   label: string;
-  skills: { name: string; level: number }[];
+  skills: { name: string; icon: string }[];
 };
 
 export type ContactContent = {

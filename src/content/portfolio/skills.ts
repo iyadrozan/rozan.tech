@@ -4,28 +4,28 @@ export const skillGroups = [
   {
     label: "Frontend",
     skills: [
-      { name: "React / Next.js", level: 95 },
-      { name: "TypeScript", level: 90 },
-      { name: "GSAP / Animations", level: 92 },
-      { name: "CSS / Tailwind", level: 95 },
+      { name: "React", icon: "SiReact" },
+      { name: "Next.js", icon: "SiNextdotjs" },
+      { name: "TypeScript", icon: "SiTypescript" },
+      { name: "GSAP", icon: "SiGreensock" },
+      { name: "Tailwind CSS", icon: "SiTailwindcss" },
     ],
   },
   {
     label: "Backend",
     skills: [
-      { name: "Node.js / Express", level: 85 },
-      { name: "PostgreSQL", level: 80 },
-      { name: "REST & GraphQL", level: 82 },
-      { name: "Docker", level: 70 },
+      { name: "Node.js", icon: "SiNodedotjs" },
+      { name: "PostgreSQL", icon: "SiPostgresql" },
+      { name: "GraphQL", icon: "SiGraphql" },
+      { name: "Docker", icon: "SiDocker" },
     ],
   },
   {
     label: "Creative",
     skills: [
-      { name: "WebGL / Three.js", level: 72 },
-      { name: "Figma / Design", level: 85 },
-      { name: "Motion Design", level: 88 },
-      { name: "Creative Coding", level: 80 },
+      { name: "Three.js", icon: "SiThreedotjs" },
+      { name: "WebGL", icon: "SiWebgl" },
+      { name: "Figma", icon: "SiFigma" },
     ],
   },
 ] satisfies SkillGroup[];
@@ -46,10 +46,10 @@ export const techItems = [
 ];
 
 export const tools = [
-  { name: "VS Code", icon: "⌨️" },
-  { name: "Figma", icon: "🎨" },
-  { name: "GitHub", icon: "🐙" },
-  { name: "Vercel", icon: "▲" },
-  { name: "Linear", icon: "⚡" },
-  { name: "Notion", icon: "📝" },
+  { name: "VS Code", icon: "VscVscodeInsiders" },
+  { name: "Figma", icon: "SiFigma" },
+  { name: "GitHub", icon: "SiGithub" },
+  { name: "Vercel", icon: "SiVercel" },
+  { name: "Linear", icon: "SiLinear" },
+  { name: "Notion", icon: "SiNotion" },
 ];

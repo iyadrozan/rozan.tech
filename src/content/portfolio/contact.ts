@@ -5,10 +5,10 @@ export const contactContent = {
   intro:
     "Have a project in mind? I'm always open to discussing new opportunities, creative ideas, or how we can bring your vision to life.",
   links: [
-    { label: "Email", value: "alex@alexdev.io", href: "mailto:alex@alexdev.io" },
-    { label: "Twitter", value: "@alexdev", href: "#" },
-    { label: "LinkedIn", value: "linkedin.com/in/alexdev", href: "#" },
-    { label: "GitHub", value: "github.com/alexdev", href: "#" },
+    { label: "Email", value: "hello@rozan.tech", href: "mailto:hello@rozan.tech" },
+    { label: "Twitter", value: "@iyadrozan", href: "#" },
+    { label: "LinkedIn", value: "linkedin.com/in/iyadrozan", href: "#" },
+    { label: "GitHub", value: "github.com/iyadrozan", href: "https://github.com/iyadrozan" },
   ],
   form: {
     fields: {

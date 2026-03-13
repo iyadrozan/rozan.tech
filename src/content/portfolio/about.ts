@@ -13,9 +13,9 @@ export const aboutContent = {
     secondary: { label: "See My Work", href: "#work" },
   },
   profile: {
-    initials: "A",
-    name: "Alex Chen",
-    handle: "@alexdev",
+    initials: "R",
+    name: "Rozan",
+    handle: "@iyadrozan",
     availability: "Available for work",
   },
   tags: [

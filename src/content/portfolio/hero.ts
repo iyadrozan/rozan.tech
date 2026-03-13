@@ -3,7 +3,7 @@ import type { HeroContent } from "./types";
 export const heroContent = {
   badge: {
     left: "EST. 2019",
-    right: "Web Developer & Creative Coder",
+    right: "Full-Stack Developer & Creative Coder",
   },
   headlineWords: ["Creating", "Digital", "Experiences"],
   subtext:

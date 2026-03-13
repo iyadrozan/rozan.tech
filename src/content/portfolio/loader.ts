@@ -1,6 +1,6 @@
 import type { LoaderContent } from "./types";
 
 export const loaderContent = {
-  brand: "Alex.dev",
+  brand: "Rozan.tech",
   tagline: "LOADING EXPERIENCE",
 } satisfies LoaderContent;
