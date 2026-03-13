@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 4%;
+    --foreground: 36 20% 93%;
+
+    --card: 0 0% 7%;
+    --card-foreground: 36 20% 93%;
+
+    --popover: 0 0% 7%;
+    --popover-foreground: 36 20% 93%;
+
+    --primary: 82 89% 61%;
+    --primary-foreground: 0 0% 4%;
+
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 36 20% 93%;
+
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 55%;
+
+    --accent: 82 89% 61%;
+    --accent-foreground: 0 0% 4%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 0 0% 14%;
+    --input: 0 0% 14%;
+    --ring: 82 89% 61%;
+
+    --radius: 0.25rem;
+
+    --surface: 0 0% 7%;
+    --surface-hover: 0 0% 10%;
+    --lime: 82 89% 61%;
+    --lime-dim: 82 60% 45%;
+
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 36 20% 93%;
+    --sidebar-primary: 82 89% 61%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 36 20% 93%;
+    --sidebar-border: 0 0% 14%;
+    --sidebar-ring: 82 89% 61%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Syne", sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  a,
+  button {
+    cursor: none;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Syne", sans-serif;
+  }
+
+  .font-mono-custom {
+    font-family: "Space Mono", monospace;
+  }
+
+  .text-lime {
+    color: hsl(var(--lime));
+  }
+
+  .bg-lime {
+    background-color: hsl(var(--lime));
+  }
+
+  .border-lime {
+    border-color: hsl(var(--lime));
+  }
+
+  .bg-surface {
+    background-color: hsl(var(--surface));
+  }
+
+  .clip-text {
+    overflow: hidden;
+    display: block;
+  }
+
+  .link-underline {
+    position: relative;
+  }
+
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: hsl(var(--lime));
+    transition: width 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .link-underline:hover::after {
+    width: 100%;
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(hsl(var(--border)) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border)) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .char {
+    display: inline-block;
+    overflow: hidden;
+  }
+
+  .noise-bg {
+    position: relative;
+  }
+
+  .noise-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='0.12'/></svg>");
+    opacity: 0.08;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+  }
+}
