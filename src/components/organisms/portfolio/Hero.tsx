@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { heroContent } from "@/content/portfolio";
+import { pick } from "@/content/portfolio/i18n";
+import { useLanguage } from "@/components/atoms/LanguageProvider";
 import { registerGsap } from "@/lib/gsap";
 
 const Hero = () => {
@@ -15,6 +17,7 @@ const Hero = () => {
   const lineRef = useRef<HTMLDivElement>(null);
   const digitalRef = useRef<HTMLSpanElement>(null);
   const digitalCanvasRef = useRef<HTMLCanvasElement>(null);
+  const { lang } = useLanguage();
 
   const addToWordsRef = (el: HTMLSpanElement | null) => {
     if (el && !wordsRef.current.includes(el)) {
@@ -214,7 +217,7 @@ const Hero = () => {
       {/* Headline */}
       <div className="mb-6">
         <h1 className="font-display font-extrabold leading-[0.9] text-[clamp(60px,10vw,160px)] tracking-tight uppercase">
-          {heroContent.headlineWords.map((word, wi) => (
+          {heroContent.headlineWords[lang].map((word, wi) => (
             <span key={wi} className="block overflow-hidden">
               <span
                 ref={addToWordsRef}
@@ -245,7 +248,7 @@ const Hero = () => {
           className="font-mono-custom text-sm text-muted-foreground max-w-sm leading-relaxed"
           style={{ opacity: 0 }}
         >
-          {heroContent.subtext}
+          {pick(heroContent.subtext, lang)}
         </p>
 
         <div ref={ctaRef} className="flex items-center gap-6" style={{ opacity: 0 }}>
@@ -258,13 +261,13 @@ const Hero = () => {
                 <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </span>
-            {heroContent.cta.primary.label}
+            {pick(heroContent.cta.primary.label, lang)}
           </a>
           <a
             href={heroContent.cta.secondary.href}
             className="font-mono-custom text-xs text-muted-foreground link-underline hover:text-foreground transition-colors duration-300"
           >
-            {heroContent.cta.secondary.label}
+            {pick(heroContent.cta.secondary.label, lang)}
           </a>
         </div>
       </div>
@@ -272,7 +275,7 @@ const Hero = () => {
       {/* Scroll indicator */}
       <div ref={scrollRef} className="absolute bottom-6 right-8 md:right-16 hidden 2xl:flex flex-col items-center gap-2" style={{ opacity: 0 }}>
         <span className="font-mono-custom text-xs text-muted-foreground tracking-widest rotate-90 origin-center mb-2">
-          {heroContent.scrollLabel}
+          {pick(heroContent.scrollLabel, lang)}
         </span>
         <div className="w-px h-16 bg-gradient-to-b from-muted-foreground to-transparent" />
       </div>
@@ -282,7 +285,7 @@ const Hero = () => {
         {heroContent.stats.map((stat, i) => (
           <div key={i} className="text-right">
             <div className="font-display font-bold text-2xl text-lime">{stat.num}</div>
-            <div className="font-mono-custom text-xs text-muted-foreground">{stat.label}</div>
+            <div className="font-mono-custom text-xs text-muted-foreground">{pick(stat.label, lang)}</div>
           </div>
         ))}
       </div>

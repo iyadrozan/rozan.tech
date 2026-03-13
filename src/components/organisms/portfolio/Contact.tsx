@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import SectionHeader from "@/components/molecules/SectionHeader";
 import { contactContent, sectionHeaders } from "@/content/portfolio";
+import { pick } from "@/content/portfolio/i18n";
+import { useLanguage } from "@/components/atoms/LanguageProvider";
 import { registerGsap } from "@/lib/gsap";
 
 const Contact = () => {
@@ -16,6 +18,7 @@ const Contact = () => {
   const [rateLimited, setRateLimited] = useState(false);
   const durationMs = 5000;
   const cooldownMs = 30_000;
+  const { lang } = useLanguage();
 
   useEffect(() => {
     registerGsap();
@@ -114,20 +117,20 @@ const Contact = () => {
 
   return (
     <section ref={sectionRef} id="contact" className="px-8 md:px-16 py-32 border-t border-border">
-      <SectionHeader {...sectionHeaders.contact} />
+      <SectionHeader index={sectionHeaders.contact.index} title={pick(sectionHeaders.contact.title, lang)} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
         {/* Left: CTA heading */}
         <div>
           <h2 ref={headingRef} className="font-display font-extrabold text-5xl md:text-7xl leading-tight uppercase mb-8">
-            {contactContent.headingLines[0]}
+            {contactContent.headingLines[lang][0]}
             <br />
-            {contactContent.headingLines[1]}
+            {contactContent.headingLines[lang][1]}
             <br />
-            <span className="text-lime italic">{contactContent.headingLines[2]}</span>
+            <span className="text-lime italic">{contactContent.headingLines[lang][2]}</span>
           </h2>
           <p className="font-mono-custom text-sm text-muted-foreground leading-relaxed mb-10 max-w-sm">
-            {contactContent.intro}
+            {pick(contactContent.intro, lang)}
           </p>
 
           <div className="space-y-4">
@@ -183,15 +186,19 @@ const Contact = () => {
                     <path d="M5 13L9 17L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
-                <h3 className="font-display font-bold text-2xl mb-2">{contactContent.form.success.title}</h3>
-                <p className="font-mono-custom text-xs text-muted-foreground">{contactContent.form.success.body}</p>
+                <h3 className="font-display font-bold text-2xl mb-2">
+                  {pick(contactContent.form.success.title, lang)}
+                </h3>
+                <p className="font-mono-custom text-xs text-muted-foreground">
+                  {pick(contactContent.form.success.body, lang)}
+                </p>
               </div>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="contact-form-field">
                 <label className="font-mono-custom text-xs text-muted-foreground block mb-2">
-                  {contactContent.form.fields.name.label}
+                  {pick(contactContent.form.fields.name.label, lang)}
                 </label>
                 <input
                   type="text"
@@ -206,7 +213,7 @@ const Contact = () => {
 
               <div className="contact-form-field">
                 <label className="font-mono-custom text-xs text-muted-foreground block mb-2">
-                  {contactContent.form.fields.email.label}
+                  {pick(contactContent.form.fields.email.label, lang)}
                 </label>
                 <input
                   type="email"
@@ -221,7 +228,7 @@ const Contact = () => {
 
               <div className="contact-form-field">
                 <label className="font-mono-custom text-xs text-muted-foreground block mb-2">
-                  {contactContent.form.fields.message.label}
+                  {pick(contactContent.form.fields.message.label, lang)}
                 </label>
                 <textarea
                   required
@@ -240,7 +247,7 @@ const Contact = () => {
                   disabled={isSubmitting}
                   className="w-full bg-lime text-primary-foreground font-display font-bold text-lg py-4 hover:bg-lime/90 transition-all duration-300 active:scale-[0.98]"
                 >
-                  {isSubmitting ? "Sending..." : contactContent.form.submitLabel}
+                  {isSubmitting ? "Sending..." : pick(contactContent.form.submitLabel, lang)}
                 </button>
                 {rateLimited ? (
                   <p className="font-mono-custom text-xs text-muted-foreground mt-3">

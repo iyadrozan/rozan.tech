@@ -4,6 +4,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import SectionHeader from "@/components/molecules/SectionHeader";
 import { projects, sectionHeaders } from "@/content/portfolio";
+import { pick } from "@/content/portfolio/i18n";
+import { useLanguage } from "@/components/atoms/LanguageProvider";
 import Image from "next/image";
 import { registerGsap } from "@/lib/gsap";
 
@@ -14,6 +16,7 @@ const Projects = () => {
   const hoverPos = useRef({ x: 0 });
   const currentPos = useRef({ x: 0 });
   const scrambleTimers = useRef<Map<string, number>>(new Map());
+  const { lang } = useLanguage();
 
   useEffect(() => {
     registerGsap();
@@ -81,7 +84,8 @@ const Projects = () => {
       className="project-section px-8 md:px-16 py-32 border-t border-border"
     >
       <SectionHeader
-        {...sectionHeaders.projects}
+        index={sectionHeaders.projects.index}
+        title={pick(sectionHeaders.projects.title, lang)}
         metaRight={`${projects.length} projects`}
       />
 

@@ -36,10 +36,13 @@ import {
   tools,
   sectionHeaders,
 } from "@/content/portfolio";
+import { pick } from "@/content/portfolio/i18n";
+import { useLanguage } from "@/components/atoms/LanguageProvider";
 
 const Skills = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const marqueRef = useRef<HTMLDivElement>(null);
+  const { lang } = useLanguage();
   const iconMap = useMemo(
     () => ({
       SiReact,
@@ -79,7 +82,7 @@ const Skills = () => {
       className="py-32 border-t border-border overflow-hidden"
     >
       <div className="px-8 md:px-16">
-        <SectionHeader {...sectionHeaders.skills} />
+        <SectionHeader index={sectionHeaders.skills.index} title={pick(sectionHeaders.skills.title, lang)} />
       </div>
 
       {/* Marquee */}

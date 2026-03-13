@@ -19,3 +19,4 @@ export type {
   SectionHeaderContent,
   SectionHeaders,
 } from "./types";
+export type { LocalizedString } from "./i18n";

@@ -3,10 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { navContent } from "@/content/portfolio";
+import { pick } from "@/content/portfolio/i18n";
+import { useLanguage } from "@/components/atoms/LanguageProvider";
+import LanguageToggle from "@/components/atoms/LanguageToggle";
 
 const Navbar = () => {
   const navRef = useRef<HTMLElement>(null);
   const [scrolled, setScrolled] = useState(false);
+  const { lang } = useLanguage();
 
   useEffect(() => {
     gsap.fromTo(
@@ -41,17 +45,20 @@ const Navbar = () => {
             className="font-mono-custom text-xs text-muted-foreground hover:text-foreground link-underline transition-colors duration-300"
           >
             <span className="text-lime mr-1">0{i + 1}.</span>
-            {link.label}
+            {pick(link.label, lang)}
           </a>
         ))}
       </div>
 
-      <a
-        href={navContent.cta.href}
-        className="hidden md:flex items-center gap-2 font-mono-custom text-xs text-lime border border-lime px-4 py-2 hover:bg-lime hover:text-primary-foreground transition-all duration-300"
-      >
-        {navContent.cta.label}
-      </a>
+      <div className="hidden md:flex items-center gap-3">
+        <LanguageToggle />
+        <a
+          href={navContent.cta.href}
+          className="items-center gap-2 font-mono-custom text-xs text-lime border border-lime px-4 py-2 hover:bg-lime hover:text-primary-foreground transition-all duration-300"
+        >
+          {pick(navContent.cta.label, lang)}
+        </a>
+      </div>
     </nav>
   );
 };

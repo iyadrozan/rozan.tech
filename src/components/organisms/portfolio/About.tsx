@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import SectionHeader from "@/components/molecules/SectionHeader";
 import { aboutContent, sectionHeaders } from "@/content/portfolio";
+import { pick } from "@/content/portfolio/i18n";
+import { useLanguage } from "@/components/atoms/LanguageProvider";
 import Image from "next/image";
 import { registerGsap } from "@/lib/gsap";
 
@@ -12,6 +14,7 @@ const About = () => {
   const textRef = useRef<HTMLParagraphElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const tagsRef = useRef<HTMLDivElement>(null);
+  const { lang } = useLanguage();
 
   useEffect(() => {
     registerGsap();
@@ -75,20 +78,20 @@ const About = () => {
 
   return (
     <section ref={sectionRef} id="about" className="px-8 md:px-16 py-32">
-      <SectionHeader {...sectionHeaders.about} />
+      <SectionHeader index={sectionHeaders.about.index} title={pick(sectionHeaders.about.title, lang)} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
         {/* Left: Big text */}
         <div>
           <h2 className="font-display font-bold text-4xl md:text-5xl mb-10 leading-tight">
-            {aboutContent.headline.line1}
+            {pick(aboutContent.headline.line1, lang)}
             <br />
-            <span className="text-lime italic">{aboutContent.headline.highlight}</span>{" "}
-            {aboutContent.headline.line2}
+            <span className="text-lime italic">{pick(aboutContent.headline.highlight, lang)}</span>{" "}
+            {pick(aboutContent.headline.line2, lang)}
           </h2>
 
           <p ref={textRef} className="font-display text-xl md:text-2xl leading-relaxed text-muted-foreground">
-            {aboutContent.bigText.split(" ").map((word, i) => (
+            {pick(aboutContent.bigText, lang).split(" ").map((word, i) => (
               <span key={i} className="word inline-block mr-[0.3em]">{word}</span>
             ))}
           </p>
@@ -98,13 +101,13 @@ const About = () => {
               href={aboutContent.cta.primary.href}
               className="font-mono-custom text-xs text-lime border border-lime px-6 py-3 hover:bg-lime hover:text-primary-foreground transition-all duration-300"
             >
-              {aboutContent.cta.primary.label}
+              {pick(aboutContent.cta.primary.label, lang)}
             </a>
             <a
               href={aboutContent.cta.secondary.href}
               className="font-mono-custom text-xs text-muted-foreground link-underline hover:text-foreground transition-colors duration-300"
             >
-              {aboutContent.cta.secondary.label}
+              {pick(aboutContent.cta.secondary.label, lang)}
             </a>
           </div>
         </div>
@@ -131,7 +134,7 @@ const About = () => {
 
             <div className="absolute -bottom-3 -right-3 bg-lime text-primary-foreground px-4 py-2 z-10">
               <span className="font-mono-custom text-xs font-bold">
-                {aboutContent.profile.availability}
+                {pick(aboutContent.profile.availability, lang)}
               </span>
             </div>
           </div>

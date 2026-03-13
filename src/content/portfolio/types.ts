@@ -1,23 +1,25 @@
+import type { LocalizedString } from "./i18n";
+
 export type HeroContent = {
   badge: { left: string; right: string };
-  headlineWords: string[];
-  subtext: string;
+  headlineWords: LocalizedString & { en: string[]; id: string[] };
+  subtext: LocalizedString;
   cta: {
-    primary: { label: string; href: string };
-    secondary: { label: string; href: string };
+    primary: { label: LocalizedString; href: string };
+    secondary: { label: LocalizedString; href: string };
   };
-  scrollLabel: string;
-  stats: { num: string; label: string }[];
+  scrollLabel: LocalizedString;
+  stats: { num: string; label: LocalizedString }[];
 };
 
 export type AboutContent = {
-  headline: { line1: string; highlight: string; line2: string };
-  bigText: string;
+  headline: { line1: LocalizedString; highlight: LocalizedString; line2: LocalizedString };
+  bigText: LocalizedString;
   cta: {
-    primary: { label: string; href: string };
-    secondary: { label: string; href: string };
+    primary: { label: LocalizedString; href: string };
+    secondary: { label: LocalizedString; href: string };
   };
-  profile: { initials: string; name: string; handle: string; availability: string };
+  profile: { initials: string; name: string; handle: string; availability: LocalizedString };
   tags: string[];
 };
 
@@ -37,30 +39,30 @@ export type SkillGroup = {
 };
 
 export type ContactContent = {
-  headingLines: [string, string, string];
-  intro: string;
+  headingLines: { en: [string, string, string]; id: [string, string, string] };
+  intro: LocalizedString;
   links: { label: string; value: string; href: string }[];
   form: {
     fields: {
-      name: { label: string; placeholder: string };
-      email: { label: string; placeholder: string };
-      message: { label: string; placeholder: string };
+      name: { label: LocalizedString; placeholder: string };
+      email: { label: LocalizedString; placeholder: string };
+      message: { label: LocalizedString; placeholder: string };
     };
-    submitLabel: string;
-    success: { title: string; body: string };
+    submitLabel: LocalizedString;
+    success: { title: LocalizedString; body: LocalizedString };
   };
 };
 
 export type NavContent = {
   brand: string;
-  links: { label: string; href: string }[];
-  cta: { label: string; href: string };
+  links: { label: LocalizedString; href: string }[];
+  cta: { label: LocalizedString; href: string };
 };
 
 export type FooterContent = {
   brand: string;
   copyright: string;
-  status: string;
+  status: LocalizedString;
   socials: { label: string; href: string }[];
 };
 
@@ -71,7 +73,7 @@ export type LoaderContent = {
 
 export type SectionHeaderContent = {
   index: string;
-  title: string;
+  title: LocalizedString;
   metaRight?: string;
 };
 
