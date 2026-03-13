@@ -2,18 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionHeader from "@/components/molecules/SectionHeader";
 import { contactContent, sectionHeaders } from "@/content/portfolio";
+import { registerGsap } from "@/lib/gsap";
 
 const Contact = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const [formState, setFormState] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const durationMs = 5000;
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    registerGsap();
     const ctx = gsap.context(() => {
       gsap.fromTo(
         headingRef.current,
@@ -52,8 +54,31 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setProgress(0);
     setSubmitted(true);
   };
+
+  useEffect(() => {
+    if (!submitted) return;
+    const start = Date.now();
+    const tick = () => {
+      const elapsed = Date.now() - start;
+      const next = Math.min(elapsed / durationMs, 1);
+      setProgress(next);
+      if (elapsed >= durationMs) {
+        setSubmitted(false);
+        setFormState({ name: "", email: "", message: "" });
+      }
+    };
+    tick();
+    const interval = window.setInterval(tick, 100);
+    return () => window.clearInterval(interval);
+  }, [submitted]);
+
+  const circleSize = 56;
+  const radius = 22;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference * (1 - progress);
 
   return (
     <section ref={sectionRef} id="contact" className="px-8 md:px-16 py-32 border-t border-border">
@@ -78,6 +103,8 @@ const Contact = () => {
               <a
                 key={link.label}
                 href={link.href}
+                target="_blank"
+                rel="noreferrer"
                 className="flex items-center gap-4 group"
               >
                 <span className="font-mono-custom text-xs text-muted-foreground w-20">{link.label}</span>
@@ -95,8 +122,32 @@ const Contact = () => {
           {submitted ? (
             <div className="h-full flex items-center justify-center min-h-[400px]">
               <div className="text-center">
-                <div className="w-16 h-16 border border-lime rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-lime">
+                <div className="relative w-16 h-16 mx-auto mb-6 flex items-center justify-center">
+                  <svg width={circleSize} height={circleSize} className="absolute text-lime/30">
+                    <circle
+                      cx={circleSize / 2}
+                      cy={circleSize / 2}
+                      r={radius}
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      fill="none"
+                    />
+                  </svg>
+                  <svg width={circleSize} height={circleSize} className="absolute text-lime">
+                    <circle
+                      cx={circleSize / 2}
+                      cy={circleSize / 2}
+                      r={radius}
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      fill="none"
+                      strokeDasharray={circumference}
+                      strokeDashoffset={offset}
+                      strokeLinecap="round"
+                      transform={`rotate(-90 ${circleSize / 2} ${circleSize / 2})`}
+                    />
+                  </svg>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="text-lime">
                     <path d="M5 13L9 17L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>

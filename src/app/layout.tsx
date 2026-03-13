@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import SmoothScroll from "@/components/atoms/SmoothScroll";
+import Cursor from "@/components/organisms/portfolio/Cursor";
 
 export const metadata: Metadata = {
   title: "Rozan.tech — Portfolio",
@@ -16,6 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <SmoothScroll />
+        <Cursor />
         {children}
       </body>
     </html>

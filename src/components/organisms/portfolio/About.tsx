@@ -2,10 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionHeader from "@/components/molecules/SectionHeader";
 import { aboutContent, sectionHeaders } from "@/content/portfolio";
 import Image from "next/image";
+import { registerGsap } from "@/lib/gsap";
 
 const About = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -14,7 +14,7 @@ const About = () => {
   const tagsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    registerGsap();
     const ctx = gsap.context(() => {
       // Text reveal with words
       if (textRef.current) {
@@ -129,7 +129,7 @@ const About = () => {
               <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-lime" />
             </div>
 
-            <div className="absolute -bottom-3 -right-3 bg-lime text-primary-foreground px-4 py-2">
+            <div className="absolute -bottom-3 -right-3 bg-lime text-primary-foreground px-4 py-2 z-10">
               <span className="font-mono-custom text-xs font-bold">
                 {aboutContent.profile.availability}
               </span>

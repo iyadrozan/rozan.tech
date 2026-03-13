@@ -2,8 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { heroContent } from "@/content/portfolio";
+import { registerGsap } from "@/lib/gsap";
 
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -23,7 +23,7 @@ const Hero = () => {
   };
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    registerGsap();
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 1.8 });
 

@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useMemo, useRef } from "react";
 import {
   SiDocker,
   SiFigma,
@@ -86,7 +84,7 @@ const Skills = () => {
 
       {/* Marquee */}
       <div className="marquee mb-20 border-y border-border py-4 overflow-hidden">
-        <div className="marquee-track flex animate-marquee whitespace-nowrap">
+        <div className="marquee-track flex whitespace-nowrap">
           {[...techItems, ...techItems].map((item, i) => (
             <span
               key={i}

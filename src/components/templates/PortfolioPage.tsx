@@ -2,8 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Cursor from "@/components/organisms/portfolio/Cursor";
 import Navbar from "@/components/organisms/portfolio/Navbar";
 import Hero from "@/components/organisms/portfolio/Hero";
 import About from "@/components/organisms/portfolio/About";
@@ -12,6 +10,7 @@ import Skills from "@/components/organisms/portfolio/Skills";
 import Contact from "@/components/organisms/portfolio/Contact";
 import Footer from "@/components/organisms/portfolio/Footer";
 import { loaderContent } from "@/content/portfolio";
+import { registerGsap } from "@/lib/gsap";
 
 const PortfolioPage = () => {
   const loaderRef = useRef<HTMLDivElement>(null);
@@ -19,7 +18,7 @@ const PortfolioPage = () => {
   const loaderBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    const { ScrollTrigger } = registerGsap();
     const tl = gsap.timeline();
 
     tl.to(loaderBarRef.current, {
@@ -65,7 +64,6 @@ const PortfolioPage = () => {
         </div>
       </div>
 
-      <Cursor />
       <Navbar />
 
       <main>

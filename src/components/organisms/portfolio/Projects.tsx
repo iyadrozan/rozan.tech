@@ -2,10 +2,10 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionHeader from "@/components/molecules/SectionHeader";
 import { projects, sectionHeaders } from "@/content/portfolio";
 import Image from "next/image";
+import { registerGsap } from "@/lib/gsap";
 
 const Projects = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -13,9 +13,10 @@ const Projects = () => {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const hoverPos = useRef({ x: 0 });
   const currentPos = useRef({ x: 0 });
+  const scrambleTimers = useRef<Map<string, number>>(new Map());
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    registerGsap();
     const ctx = gsap.context(() => {
       const items = sectionRef.current?.querySelectorAll(".project-row");
       items?.forEach((item) => {
@@ -64,6 +65,13 @@ const Projects = () => {
     };
   }, []);
 
+  useEffect(() => {
+    return () => {
+      scrambleTimers.current.forEach((interval) => window.clearInterval(interval));
+      scrambleTimers.current.clear();
+    };
+  }, []);
+
   const scrambleLetters = useMemo(() => "ABCDEFGHIJKLMNOPQRSTUVWXYZ", []);
 
   return (
@@ -86,6 +94,8 @@ const Projects = () => {
               setHoveredId(project.id);
               const target = event.currentTarget.querySelector("h3");
               if (!target) return;
+              const existing = scrambleTimers.current.get(project.id);
+              if (existing) window.clearInterval(existing);
               const finalText = project.title;
               let iteration = 0;
               const interval = window.setInterval(() => {
@@ -101,8 +111,13 @@ const Projects = () => {
                 }
                 iteration += 1 / 3;
               }, 20);
+              scrambleTimers.current.set(project.id, interval);
             }}
-            onMouseLeave={() => setHoveredId(null)}
+            onMouseLeave={() => {
+              setHoveredId(null);
+              const existing = scrambleTimers.current.get(project.id);
+              if (existing) window.clearInterval(existing);
+            }}
           >
             <div className="project-index">
               <span>{project.id}</span>

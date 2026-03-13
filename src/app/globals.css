@@ -393,7 +393,89 @@
       height: 40vw;
     }
   }
-}
-  .project-row:hover .project-name h3 {
-    color: hsl(var(--lime));
+
+  .notfound {
+    --ghost: hsl(82 85% 55%);
+    --ghost-light: hsl(82 80% 75%);
+    --ghost-highlight: hsl(82 90% 85%);
+    --text-404: hsl(82 80% 70%);
+    --blush: hsl(0 70% 65%);
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 2rem;
+    align-items: center;
+    padding: 2.5rem 2rem;
+    background: radial-gradient(circle at top, hsl(0 0% 8%), hsl(0 0% 4%));
+    color: var(--text-404);
   }
+
+  .notfound__svg {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .notfound__text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .notfound__copy h1 {
+    font-size: clamp(4rem, 8vw, 7rem);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-shadow: 0 0 18px rgba(105, 253, 216, 0.35);
+  }
+
+  .notfound__copy h2 {
+    font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+    font-weight: 500;
+    color: hsl(var(--foreground));
+  }
+
+  .notfound__copy p {
+    max-width: 32rem;
+    color: hsl(var(--muted-foreground));
+    margin: 0.75rem 0 1.5rem;
+  }
+
+  .notfound__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 3rem;
+    border-radius: 999px;
+    border: 1px solid hsl(var(--lime));
+    color: hsl(var(--background));
+    background: hsl(var(--lime));
+    font-family: "Space Mono", monospace;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: 0.4s ease;
+  }
+
+  .notfound__btn:hover {
+    background: transparent;
+    color: hsl(var(--lime));
+    box-shadow: 0 0 14px rgba(105, 253, 216, 0.5);
+  }
+
+  @media (min-width: 900px) {
+    .notfound {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      padding: 3.5rem 4rem;
+    }
+  }
+}
+
+.notfound svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.project-row:hover .project-name h3 {
+  color: hsl(var(--lime));
+}
