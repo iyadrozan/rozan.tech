@@ -3,6 +3,7 @@ export { aboutContent } from "./about";
 export { projects } from "./projects";
 export { skillGroups, techItems, tools } from "./skills";
 export { contactContent } from "./contact";
+export { pricingContent } from "./pricing";
 export { navContent } from "./nav";
 export { footerContent } from "./footer";
 export { loaderContent } from "./loader";
@@ -13,6 +14,9 @@ export type {
   ProjectItem,
   SkillGroup,
   ContactContent,
+  PricingContent,
+  PricingPackage,
+  PricingNote,
   NavContent,
   FooterContent,
   LoaderContent,

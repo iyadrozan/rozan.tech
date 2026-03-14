@@ -6,6 +6,7 @@ import Navbar from "@/components/organisms/portfolio/Navbar";
 import Hero from "@/components/organisms/portfolio/Hero";
 import About from "@/components/organisms/portfolio/About";
 import Projects from "@/components/organisms/portfolio/Projects";
+import Pricing from "@/components/organisms/portfolio/Pricing";
 import Skills from "@/components/organisms/portfolio/Skills";
 import Contact from "@/components/organisms/portfolio/Contact";
 import Footer from "@/components/organisms/portfolio/Footer";
@@ -70,6 +71,7 @@ const PortfolioPage = () => {
         <Hero />
         <About />
         <Projects />
+        <Pricing />
         <Skills />
         <Contact />
       </main>

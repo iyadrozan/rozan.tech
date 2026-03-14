@@ -5,6 +5,7 @@ export const navContent = {
   links: [
     { label: { en: "About", id: "Tentang" }, href: "#about" },
     { label: { en: "Work", id: "Karya" }, href: "#work" },
+    { label: { en: "Pricing", id: "Harga" }, href: "#pricing" },
     { label: { en: "Skills", id: "Keahlian" }, href: "#skills" },
     { label: { en: "Contact", id: "Kontak" }, href: "#contact" },
   ],

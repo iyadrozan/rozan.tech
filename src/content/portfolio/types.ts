@@ -53,6 +53,27 @@ export type ContactContent = {
   };
 };
 
+export type PricingPackage = {
+  name: string;
+  price: string;
+  subtitle: LocalizedString;
+  features: { text: LocalizedString; included: boolean }[];
+  ctaLabel: LocalizedString;
+  ctaPrompt: string;
+  badge?: LocalizedString;
+  featured?: boolean;
+};
+
+export type PricingNote = {
+  label: LocalizedString;
+  value: LocalizedString;
+};
+
+export type PricingContent = {
+  packages: PricingPackage[];
+  notes: PricingNote[];
+};
+
 export type NavContent = {
   brand: string;
   links: { label: LocalizedString; href: string }[];
@@ -80,6 +101,7 @@ export type SectionHeaderContent = {
 export type SectionHeaders = {
   about: SectionHeaderContent;
   projects: SectionHeaderContent;
+  pricing: SectionHeaderContent;
   skills: SectionHeaderContent;
   contact: SectionHeaderContent;
 };
