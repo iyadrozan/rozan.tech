@@ -7,7 +7,7 @@ export const heroContent = {
   },
   headlineWords: {
     en: ["Creating", "Digital", "Experiences"],
-    id: ["Menciptakan", "Digital", "Pengalaman"],
+    id: ["Menciptakan", "Pengalaman", "Digital"],
   },
   subtext: {
     en: "Rozan is a full-stack developer crafting bold, animated web experiences — from concept to deployment.",

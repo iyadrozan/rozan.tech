@@ -121,7 +121,8 @@ const Hero = () => {
       textCtx.textAlign = "center";
       textCtx.textBaseline = "middle";
       textCtx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
-      textCtx.fillText("Digital", width / 2, height / 2);
+      const label = textEl.textContent?.trim() || "Digital";
+      textCtx.fillText(label, width / 2, height / 2);
 
       origin.x = width * 0.7;
       origin.y = -height * 0.2;
@@ -195,7 +196,7 @@ const Hero = () => {
       gsap.ticker.remove(draw);
       tweens.forEach((tween) => tween.kill());
     };
-  }, []);
+  }, [lang]);
 
   return (
     <section
@@ -221,7 +222,7 @@ const Hero = () => {
             <span key={wi} className="block overflow-hidden">
               <span
                 ref={addToWordsRef}
-                className={`inline-block ${wi === 1 ? "text-lime italic" : ""}`}
+                className={`inline-block ${word === "Digital" ? "text-lime italic" : ""}`}
                 style={{ transform: "translateY(110%)", opacity: 0 }}
               >
                 {word === "Digital" ? (
