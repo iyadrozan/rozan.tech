@@ -15,12 +15,15 @@ export const heroContent = {
   },
   cta: {
     primary: { label: { en: "View Work", id: "Lihat Karya" }, href: "#work" },
-    secondary: { label: { en: "Let's Talk", id: "Mari Bicara" }, href: "#contact" },
+    secondary: {
+      label: { en: "Let's Talk", id: "Mari Bicara" },
+      href: "#contact",
+    },
   },
   scrollLabel: { en: "SCROLL", id: "SCROLL" },
   stats: [
     { num: "5+", label: { en: "Years Exp.", id: "Tahun Pengalaman" } },
-    { num: "40+", label: { en: "Projects", id: "Proyek" } },
-    { num: "20+", label: { en: "Clients", id: "Klien" } },
+    { num: "20+", label: { en: "Projects", id: "Proyek" } },
+    { num: "10+", label: { en: "Clients", id: "Klien" } },
   ],
 } satisfies HeroContent;
